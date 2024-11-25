@@ -71,9 +71,9 @@ const CartItems = () => {
     <>
       {!cart?.data?.products.length ? (
         <div className="text-center mt-[150px]">
-          <span className="font-extrabold text-7xl text-[--color-green-600]">
+          <h1 className="font-extrabold text-7xl text-[--color-green-600]">
             Shopping Cart
-          </span>
+          </h1>
           <div className="flex justify-center items-center">
             <img className="w-[400px]" src="images/emptyCart.png" alt="" />
           </div>
@@ -88,14 +88,14 @@ const CartItems = () => {
           <h1 className="font-extrabold text-center text-3xl md:text-5xl text-[--color-green-600]">
             Cart Shopping
           </h1>
-          <div className=" my-8 flex items-center justify-between">
-            <h2 className="text-1xl md:text-3xl font-semibold">
+          <div className=" my-8 flex flex-col md:flex-row items-start gap-3 md:items-center justify-between">
+            <h2 className="text-3xl md:text-4xl font-semibold">
               Number of cart items:{" "}
               <span className="text-[--color-green-700]">
                 {cart.numOfCartItems}
               </span>
             </h2>
-            <h2 className="text-1xl text-end md:text-3xl font-semibold">
+            <h2 className="text-3xl text-end md:text-4xl font-semibold">
               Total Cart Price:
               <span className="text-[--color-green-700]">
                 {" "}
@@ -151,7 +151,6 @@ const CartItems = () => {
                               product.count - 1
                             )
                           }
-                          handleUpdateProduct
                           className="inline-flex items-center justify-center h-10 w-10  me-3 text-xl font-extrabold text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                           type="button"
                         >

@@ -38,7 +38,7 @@ const ForgetPasswordForm = () => {
               required: "This filed is required",
               pattern: {
                 value: /\S+@\S+\.\S+/,
-                message: "Please provide a valid email address",
+                message: "*Please provide a valid email address",
               },
             }}
             type="email"

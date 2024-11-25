@@ -18,8 +18,8 @@ const SignupForm = () => {
     "signup",
     "Account successfully created!"
   );
+
   function onSubmit(data) {
-    console.log(data);
     signup(data);
   }
 
@@ -40,7 +40,7 @@ const SignupForm = () => {
           <Input
             register={register}
             validationRules={{
-              required: "This filed is required!",
+              required: "*This filed is required!",
             }}
             type="text"
             name="name"
@@ -59,10 +59,10 @@ const SignupForm = () => {
           <Input
             register={register}
             validationRules={{
-              required: "This filed is required!",
+              required: "*This filed is required!",
               pattern: {
                 value: /\S+@\S+\.\S+/,
-                message: "Please provide a valid email address",
+                message: "*Please provide a valid email address",
               },
             }}
             type="email"
@@ -83,10 +83,10 @@ const SignupForm = () => {
           <Input
             register={register}
             validationRules={{
-              required: "This filed is required!",
+              required: "*This filed is required!",
               minLength: {
                 value: 6,
-                message: "Your password must be at least 6 characters",
+                message: "*Your password must be at least 6 characters",
               },
             }}
             type="password"
@@ -107,10 +107,10 @@ const SignupForm = () => {
           <Input
             register={register}
             validationRules={{
-              required: "This filed is required!",
+              required: "*This filed is required!",
               minLength: {
                 value: 6,
-                message: "Your password must be at least 6 characters",
+                message: "*Your password must be at least 6 characters",
               },
               validate: (value) =>
                 value === getValues().password ||
@@ -134,11 +134,11 @@ const SignupForm = () => {
           <Input
             register={register}
             validationRules={{
-              required: "This filed is required!",
+              required: "*This filed is required!",
               pattern: {
                 value: /^(\+?2(0|1)[0-9]{10}|01[0-9]{9})$/,
 
-                message: "Please enter a valid Egyptian phone number",
+                message: "*Please enter a valid Egyptian phone number",
               },
             }}
             type="tel"

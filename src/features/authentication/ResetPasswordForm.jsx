@@ -5,7 +5,7 @@ import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import { Link } from "react-router-dom";
 import Input from "../../ui/Input";
-// import useResetPassword from "./useResetPassword";
+
 import Spinner from "../../ui/Spinner";
 
 import usePutData from "../../reusable/usePutData";
@@ -13,17 +13,18 @@ import usePutData from "../../reusable/usePutData";
 const ResetPasswordForm = () => {
   const { handleSubmit, register, formState } = useForm();
   const { errors } = formState;
-  // const { resetPassword, isPending } = useResetPassword();
+
   const { mutate: resetPassword, isPending } = usePutData(
     "",
     "resetPassword",
     "PUT",
+
     "Error resetting password",
     true,
     false,
     "Password successfully reset",
-    null
-    // "resetPassword"
+    null,
+    "resetPassword"
   );
   function onSubmit(data) {
     console.log(data);
@@ -46,10 +47,10 @@ const ResetPasswordForm = () => {
             isPending={isPending}
             register={register}
             validationRules={{
-              required: "This filed is required",
+              required: "*This filed is required",
               pattern: {
                 value: /\S+@\S+\.\S+/,
-                message: "Please provide a valid email address",
+                message: "*Please provide a valid email address",
               },
             }}
             type="email"
@@ -69,10 +70,10 @@ const ResetPasswordForm = () => {
             isPending={isPending}
             register={register}
             validationRules={{
-              required: "This filed is required",
+              required: "*This filed is required",
               minLength: {
                 value: 6,
-                message: "Your password must be at least 6 characters",
+                message: "*Your password must be at least 6 characters",
               },
             }}
             type="password"

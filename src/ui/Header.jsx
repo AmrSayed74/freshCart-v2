@@ -1,5 +1,3 @@
-import Logout from "../features/authentication/Logout";
-import CartIcon from "../features/Cart/CartIcon";
 import Logo from "./Logo";
 import Nav from "./Nav";
 

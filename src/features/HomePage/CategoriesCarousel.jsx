@@ -3,7 +3,6 @@ import { Pagination } from "swiper/modules";
 import "../../styles/swiperStyles.css";
 import "swiper/css";
 
-// import useCategories from "../Categories/useCategories";
 import LoaderIndicator from "../../ui/LoaderIndicator";
 import useGetData from "../../reusable/useGetData";
 const CategoriesCarousel = () => {
@@ -12,6 +11,7 @@ const CategoriesCarousel = () => {
     "categories",
     "Failed to retrieve categories"
   );
+  console.log(categories);
 
   if (isPending) return <LoaderIndicator />;
   return (
@@ -27,7 +27,7 @@ const CategoriesCarousel = () => {
       breakpoints={breakPoints}
       className="mySwiperTwo mt-[50px] "
     >
-      {categories.data?.map((category) => (
+      {categories?.data?.map((category) => (
         <SwiperSlide key={category._id}>
           <img
             className="object-center object-cover w-[350px] h-[350px]"

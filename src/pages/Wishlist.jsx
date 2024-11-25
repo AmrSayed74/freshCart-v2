@@ -1,5 +1,11 @@
+import WishListItems from "../features/Wishlist/WishListItems";
+
 const WishList = () => {
-  return <div>WishList</div>;
+  return (
+    <div>
+      <WishListItems />
+    </div>
+  );
 };
 
 export default WishList;

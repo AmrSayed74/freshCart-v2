@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { PUT } from "./request";
+import { useNavigate } from "react-router-dom";
 
 const usePutData = (
   key,
@@ -9,17 +10,24 @@ const usePutData = (
   errorMessage,
   auth,
   cart,
-  successMessage
+  successMessage,
+  actionType
 ) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: (values) => {
       // console.log(values, key);
       return PUT(fetch, endpoint, method, values, errorMessage, auth, cart);
     },
-    onSuccess: (values) => {
-      console.log(values);
+    onSuccess: (data) => {
+      if (data.token) {
+        if (actionType === "reset-password") {
+          navigate("/login");
+        }
+      }
+
       toast.success(successMessage);
       queryClient.invalidateQueries({ queryKey: [key] });
       console.log(key);

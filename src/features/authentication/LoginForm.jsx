@@ -18,10 +18,11 @@ const LoginForm = () => {
     "login",
     "Login successfully"
   );
+
   function onSubmit(data) {
-    console.log(data);
     login(data);
   }
+
   return (
     <div className="mt-20 p-4">
       <div className="flex flex-col items-center justify-center text-center">
@@ -39,10 +40,10 @@ const LoginForm = () => {
           <Input
             register={register}
             validationRules={{
-              required: "This filed is required",
+              required: "*This filed is required",
               pattern: {
                 value: /\S+@\S+\.\S+/,
-                message: "Please provide a valid email address",
+                message: "*Please provide a valid email address",
               },
             }}
             type="email"
@@ -63,10 +64,10 @@ const LoginForm = () => {
           <Input
             register={register}
             validationRules={{
-              required: "This filed is required",
+              required: "*This filed is required",
               minLength: {
                 value: 6,
-                message: "Your password must be at least 6 characters",
+                message: "*Your password must be at least 6 characters",
               },
             }}
             type="password"

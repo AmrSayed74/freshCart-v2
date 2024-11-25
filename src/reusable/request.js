@@ -1,3 +1,4 @@
+import axios from "axios";
 import { BASE_URL } from "../services/baseUrl";
 const headers = {
   "Content-Type": "application/json",
@@ -11,31 +12,29 @@ export async function GET(
   errorMessage = "Failed to fetch data",
   id
 ) {
-  const res = await request(`${BASE_URL}/${endpoint}${id ? `/${id}` : ""}`, {
-    headers: { ...headers },
-  });
+  console.log(request);
+  try {
+    const url = `${BASE_URL}/${endpoint}${id ? `/${id}` : ""}`;
 
-  if (!res.ok) throw new Error(errorMessage);
-  const data = await res.json();
-  return data;
+    if (request === axios) {
+      const res = await request.get(url, {
+        headers: { ...headers },
+      });
+      return res.data;
+    }
+
+    const res = await request(url, {
+      headers: { ...headers },
+    });
+
+    if (!res.ok) throw new Error(errorMessage);
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || errorMessage);
+  }
 }
-
-// export const GET = async (
-//   request,
-//   endpoint,
-//   errorMessage = "Failed to fetch data",
-//   id
-// ) => {
-//   try {
-//     const res = await request(`${BASE_URL}/${endpoint}${id ? `/${id}` : ""}`, {
-//       headers: { ...headers },
-//     });
-//     const data = await res.json();
-//     return data;
-//   } catch (error) {
-//     console.error(error || errorMessage);
-//   }
-// };
 
 export async function POST(
   request,
@@ -44,61 +43,51 @@ export async function POST(
   values,
   errorMessage = "Failed to fetch data"
 ) {
-  // console.log(request, endpoint, method, values, headers, errorMessage);
-  const res = await request(`${BASE_URL}/${endpoint}`, {
-    headers: { ...headers },
-    method: method,
-    body: values ? JSON.stringify(values) : "",
-  });
-  if (!res.ok) throw new Error(errorMessage);
-  const data = await res.json();
-  return data;
+  console.log(request, endpoint, method, values, headers, errorMessage);
+  const url = `${BASE_URL}/${endpoint}`;
+
+  if (request === axios) {
+    const res = await request.post(url, values || null, {
+      headers: { ...headers },
+    });
+    return res.data;
+  } else {
+    const res = await request(url, {
+      headers: { ...headers },
+      method: method,
+      body: values ? JSON.stringify(values) : "",
+    });
+
+    if (!res.ok) throw new Error(errorMessage);
+    const data = await res.json();
+    return data;
+  }
 }
 
 export async function AUTH(request, endpoint, method, values) {
-  console.log(request, endpoint, method, values, headers);
-  const res = await request(`${BASE_URL}/auth/${endpoint}`, {
-    headers: { ...headers },
-    method: method,
-    body: values ? JSON.stringify(values) : "",
-  });
-  if (!res.ok) {
-    const errorData = await res.json();
+  // console.log(request, endpoint, method, values, headers);
+  const url = `${BASE_URL}/auth/${endpoint}`;
 
-    throw new Error(errorData.message);
+  if (request === axios) {
+    const res = await request.post(url, values || null, {
+      headers: { ...headers },
+    });
+    return res.data;
+  } else {
+    const res = await request(url, {
+      headers: { ...headers },
+      method: method,
+      body: values ? JSON.stringify(values) : "",
+    });
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
   }
-  const data = await res.json();
-  console.log(data);
-  return data;
 }
-
-// export const AUTH = async (
-//   request,
-//   endpoint,
-//   method,
-//   values = {},
-//   token = null
-// ) => {
-//   try {
-//     const response = await request(`${BASE_URL}/auth/${endpoint}`, {
-//       method: method,
-//       headers: {
-//         "Content-Type": "application/json",
-//         ...(token && { Authorization: `Bearer ${token}` }),
-//       },
-//       body: values ? JSON.stringify(values) : null,
-//     });
-
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! Status: ${response.status}`);
-//     }
-
-//     return await response.json();
-//   } catch (error) {
-//     console.error("Error in AUTH function:", error.message);
-//     throw error;
-//   }
-// };
 
 export async function PUT(
   request,
@@ -109,20 +98,32 @@ export async function PUT(
   auth,
   cart
 ) {
-  const res = await request(
-    `${BASE_URL}/${auth ? `auth/${endpoint}` : ""}${
-      cart ? `${endpoint}${values.productId ? `/${values.productId}` : ""}` : ""
-    }`,
-    {
+  const url = `${BASE_URL}/${auth ? `auth/${endpoint}` : ""}${
+    cart ? `${endpoint}${values.productId ? `/${values.productId}` : ""}` : ""
+  }`;
+
+  if (request === axios) {
+    const res = await request.put(url, values || {}, {
+      headers: { ...headers },
+    });
+    return res.data;
+  } else {
+    // Using fetch for the PUT request
+    const res = await request(url, {
       method: method,
       headers: { ...headers },
-      body: values && JSON.stringify(values || { count: values.count }),
+      body: values ? JSON.stringify(values) : null,
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || errorMessage);
     }
-  );
-  if (!res.ok) throw new Error(errorMessage);
-  const data = await res.json();
-  console.log(data);
-  return data;
+
+    const data = await res.json();
+    console.log(data);
+    return data;
+  }
 }
 
 export async function DELETE(
@@ -132,38 +133,67 @@ export async function DELETE(
   values,
   errorMessage = "Failed to fetch data"
 ) {
-  const res = await request(
-    `${BASE_URL}/${endpoint}${values.productId ? `/${values.productId}` : ""}`,
-    {
+  const url = `${BASE_URL}/${endpoint}${
+    values.productId ? `/${values.productId}` : ""
+  }`;
+
+  if (request === axios) {
+    // Using axios for DELETE
+    const res = await request.delete(url, {
+      headers: { ...headers },
+    });
+    return res.data;
+  } else {
+    // Using fetch for DELETE
+    const res = await request(url, {
       method: method,
       headers: { ...headers },
-    }
-  );
-  if (!res.ok) {
-    throw new Error(errorMessage);
-  }
-  const data = await res.json();
+    });
 
-  return data;
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || errorMessage);
+    }
+
+    const data = await res.json();
+    return data;
+  }
 }
 
-// export async function DELETEe(
-//   request,
-//   endpoint,
-//   method,
-//   values = {},
-//   errorMessage = "Failed to fetch data"
-// ) {
-//   const url = `${BASE_URL}/${endpoint}${values.productId ? `/${values.productId}` : ""}`;
-//   const res = await request(url, {
-//     method: method,
-//     headers: { ...headers },
-//   });
+//! IN CASE IF I WANT TO COMBINE POST AND AUTH FUNCTIONS IN ONE FUNCTION ❤️
+//! usePostAuth.js => HANDLE THIS REQUEST
+/*export async function POSTAUTH(
+  request,
+  endpoint,
+  method,
+  values,
+  errorMessage = "Failed to fetch data",
+  auth,
+  cart
+) {
+  console.log("Values being sent:", values);
+  const url = `${BASE_URL}${auth ? "/auth" : ""}${
+    cart ? "/cart" : ""
+  }/${endpoint}`;
+  console.log("Request URL:", url);
+  if (request === axios) {
+    const res = await request.post(url, values, {
+      headers: { ...headers },
+    });
+    return res.data;
+  } else {
+    const res = await request(url, {
+      headers: { ...headers },
+      method: method,
+      body: values ? JSON.stringify(values) : "",
+    });
+    if (!res.ok) {
+      const errorData = await res.json();
 
-//   if (!res.ok) {
-//     throw new Error(errorMessage);
-//   }
-
-//   const data = await res.json();
-//   return data;
-// }
+      throw new Error(errorData.message || errorMessage);
+    }
+    const data = await res.json();
+    return data;
+  }
+}
+*/

@@ -50,12 +50,3 @@ const Nav = () => {
 };
 
 export default Nav;
-/*
-
-    position: absolute;
-    top: 34px;
-    left: -136px;
-    min-width: 165px;
-    background: red;
-    
-    */

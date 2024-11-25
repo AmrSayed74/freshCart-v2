@@ -37,10 +37,10 @@ const VerifyCodeForm = () => {
           <Input
             register={register}
             validationRules={{
-              required: "This filed is required",
+              required: "*This filed is required",
               pattern: {
                 value: /^[0-9]{5,6}$/,
-                message: "Please provide a valid verification code",
+                message: "*Please provide a valid verification code",
               },
             }}
             type="text"

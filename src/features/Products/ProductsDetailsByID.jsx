@@ -1,18 +1,15 @@
-import { HiOutlineHeart } from "react-icons/hi";
+import { useParams } from "react-router-dom";
+import ProductImgSwiper from "./ProductImgSwiper";
+import useGetData from "../../reusable/useGetData";
+import usePostData from "../../reusable/usePostData";
 import Button from "../../ui/Button";
 import LoaderIndicator from "../../ui/LoaderIndicator";
 import { formatCurrency } from "../../utils/helpers";
-import ProductImgSwiper from "./ProductImgSwiper";
-// import useSpecificProduct from "./useSpecificProduct";
 import RatingStar from "../../ui/RatingStar";
-// import useAddToCart from "./../Cart/useAddToCart";
 import Spinner from "../../ui/Spinner";
-import useGetData from "../../reusable/useGetData";
-import { useParams } from "react-router-dom";
-import usePostData from "../../reusable/usePostData";
+import { HiOutlineHeart } from "react-icons/hi";
 
 const ProductsDetailsByID = () => {
-  // const { product, isLoading } = useSpecificProduct();
   const { productId } = useParams();
 
   const { data: product, isPending: isLoading } = useGetData(
@@ -29,8 +26,14 @@ const ProductsDetailsByID = () => {
     "Failed to add to cart",
     "Product Successfully added to cart "
   );
+  const { mutate: addToWishList, isPending: isAddingToWishlist } = usePostData(
+    "wishlist",
+    "wishlist",
+    "POST",
+    "Failed to add to wishlist",
+    "Product Successfully added to wishlist"
+  );
 
-  // const { isPending, mutate: addToCartClick } = useAddToCart();
   if (isLoading) return <LoaderIndicator />;
 
   const { title, description, price, ratingsAverage } = product.data || {};
@@ -60,9 +63,16 @@ const ProductsDetailsByID = () => {
           >
             {isPending ? <Spinner /> : <span>+ Add to cart</span>}
           </Button>
-          <span className="text-5xl cursor-pointer ">
-            <HiOutlineHeart />
-          </span>
+          <div
+            onClick={() => addToWishList({ productId: product.data.id })}
+            className=" cursor-pointer "
+          >
+            <img
+              src="/images/favorite.svg"
+              alt="favorite"
+              className="w-[30px]"
+            />
+          </div>
         </div>
       </div>
     </div>
