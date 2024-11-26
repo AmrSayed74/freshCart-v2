@@ -17,7 +17,7 @@ const ProtectedRoutes = ({ children }) => {
 
 export default ProtectedRoutes;
 
-// don't touch 
+// don't touch
 /*
 import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect } from "react";

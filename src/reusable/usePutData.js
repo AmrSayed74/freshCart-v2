@@ -18,7 +18,6 @@ const usePutData = (
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: (values) => {
-      // console.log(values, key);
       return PUT(fetch, endpoint, method, values, errorMessage, auth, cart);
     },
     onSuccess: (data) => {

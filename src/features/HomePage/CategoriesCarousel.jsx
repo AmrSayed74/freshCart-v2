@@ -11,7 +11,6 @@ const CategoriesCarousel = () => {
     "categories",
     "Failed to retrieve categories"
   );
-  console.log(categories);
 
   if (isPending) return <LoaderIndicator />;
   return (

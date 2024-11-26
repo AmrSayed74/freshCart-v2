@@ -41,7 +41,7 @@ body {
   /* font-family: "Poppins", sans-serif; */
   font-family: "Outfit", sans-serif;
   transition: all 0.2s;
-  background-image: url("images/bg.webp");
+  background-image: url("images/bg.svg");
   background-size: cover;
   /* background-repeat: repeat; */
   background-attachment: fixed;

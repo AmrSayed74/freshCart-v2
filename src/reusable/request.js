@@ -12,7 +12,6 @@ export async function GET(
   errorMessage = "Failed to fetch data",
   id
 ) {
-  console.log(request);
   try {
     const url = `${BASE_URL}/${endpoint}${id ? `/${id}` : ""}`;
 
@@ -84,7 +83,7 @@ export async function AUTH(request, endpoint, method, values) {
       throw new Error(errorData.message);
     }
     const data = await res.json();
-    console.log(data);
+
     return data;
   }
 }
