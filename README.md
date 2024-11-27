@@ -41,11 +41,12 @@
 FreshCart-v2/
 ├── public/            # Public assets like images and icons
 ├── src/               # Main source folder
-│   ├── components/    # Shared UI components
+│   ├── features/      # Main Features
 │   ├── pages/         # Individual pages (Home, Products, Cart, etc.)
 │   ├── reusable/      # Custom hooks and reusable logic
 │   ├── services/      # API integrations
 │   ├── styles/        # Global styles and Tailwind configurations
+│   ├── ui/            # Shared UI components
 │   └── utils/         # Helper functions like formatCurrency
 ├── package.json       # Project metadata and dependencies
 └── README.md          # Project documentation
