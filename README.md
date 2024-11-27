@@ -1,8 +1,6 @@
 # **FreshCart**
-
-![FreshCart Logo](https://via.placeholder.com/600x200?text=FreshCart)  
 **A modern e-commerce platform to explore, manage, and purchase products easily.**
-
+[live preview](https://fresh-cart-v2.netlify.app/)
 ---
 
 ## **🌟 Features**
@@ -38,19 +36,7 @@
 
 ---
 
-## **🚀 Getting Started**
-
-### **Prerequisites**
-
-Ensure you have the following installed on your system:
-
-- **Node.js** (v16 or higher)  
-  [Download here](https://nodejs.org/)
-- **Git**  
-  [Download here](https://git-scm.com/)
-
----
-
+# **Project Structure**
 ```plaintext
 FreshCart-v2/
 ├── public/            # Public assets like images and icons
@@ -61,6 +47,10 @@ FreshCart-v2/
 │   ├── services/      # API integrations
 │   ├── styles/        # Global styles and Tailwind configurations
 │   └── utils/         # Helper functions like formatCurrency
-├── .env               # Environment variables
 ├── package.json       # Project metadata and dependencies
 └── README.md          # Project documentation
+```
+---
+
+![screencapture-fresh-cart-v2-netlify-app-home-2024-11-27-21_10_29](https://github.com/user-attachments/assets/bee4c857-a079-45e4-86f9-c2f66ba1134e)
+
