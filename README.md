@@ -51,17 +51,7 @@ Ensure you have the following installed on your system:
 
 ---
 
-### **Installation**
-
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/AmrSayed74/freshCart-v2.git
-   cd freshCart-v2
-npm install
-npm start
-Open http://localhost:5173 in your browser.
-
+```plaintext
 FreshCart-v2/
 ├── public/            # Public assets like images and icons
 ├── src/               # Main source folder
