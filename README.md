@@ -48,7 +48,6 @@ FreshCart-v2/
 │   ├── features/      # Main Features
 │   ├── pages/         # Individual pages (Home, Products, Cart, etc.)
 │   ├── reusable/      # Custom hooks and reusable logic
-│   ├── services/      # API integrations
 │   ├── styles/        # Global styles and Tailwind configurations
 │   ├── ui/            # Shared UI components
 │   └── utils/         # Helper functions like formatCurrency
