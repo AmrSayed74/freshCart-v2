@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../services/baseUrl";
+import { BASE_URL } from "./baseUrl";
 const headers = {
   "Content-Type": "application/json",
   get token() {
